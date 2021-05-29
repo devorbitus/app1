@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: app1
+build:
+  tagPolicy:
+    gitCommit: {}
+  artifacts:
+    - image: devorbitus/app1
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yml
