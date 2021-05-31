@@ -6,7 +6,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 app.get('/', function(_req, res) {
-    res.status(200).send('Hello world!!!!!!');
+    res.status(200).send('Hello world!');
 });
 
 app.get('/accesskey', (_req, res) => {
