@@ -4,27 +4,25 @@ metadata:
   name: app1
   labels:
     app: node-app1
-  namespace: app1
+  namespace: cg-akeyless
 spec:
   replicas: 1
   selector:
     matchLabels:
-      com.talend.application: all
       app: node-app1
   template:
     metadata:
       labels:
         app: node-app1
-        com.talend.application: all
-      annotations:
-        sidecar.vault.talend.org/inject: "true"
-        sidecar.vault.talend.org/secrets-type: "static"
-        sidecar.vault.talend.org/secrets-path: "everyone/public-key"
+      annotations: 
+        akeyless/enabled: "true"
+        akeyless/inject_file: "/K8s/app1secret"
     spec:
       containers:
       - name: node-app1
         image: devorbitus/app1
         ports:
         - containerPort: 3000
-      serviceAccount: everyone
-      serviceAccountName: everyone
+        # env:
+        #   - name: MY_SECRET
+        #     value: akeyless:/K8s/app1secret

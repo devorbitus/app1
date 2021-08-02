@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2beta5
+apiVersion: skaffold/v2beta19
 kind: Config
 metadata:
   name: app1
@@ -7,7 +7,13 @@ build:
     gitCommit: {}
   artifacts:
     - image: devorbitus/app1
+      custom:
+        buildCommand: ./custom-build.sh
+
 deploy:
   kubectl:
     manifests:
     - deployment.yml
+    - service.yml
+    - ingress.yml
+    defaultNamespace: cg-akeyless
